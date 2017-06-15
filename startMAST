@@ -1,0 +1,9 @@
+#!/bin/bash
+# this script will
+#   i) Start  MAST container with name 'mast_beta'
+#  in the  the shell-terminal.
+#  To user paraview : user need to install paraviw seprately
+#  Note: user can launch script in different  shell to have MAST
+#  working environment in different terminal
+docker start  mast
+docker attach mast

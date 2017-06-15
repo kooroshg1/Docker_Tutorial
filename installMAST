@@ -1,0 +1,34 @@
+#!/bin/sh
+# this script designed to work on  build of docker which run  natively on Mac
+#  1) Pull MAST from docker hub if it does not exist in local environment
+#  2) create  container with name mast
+#  NOTE: above command assume script to be placed in in home area
+#  Other Info :
+#          *  This script has been tested  with  docker version 17.03.1
+#          *  Please Note: Install dockertool box from docker website
+#          * Note: to postprocess, please install paraview in your
+#            MAC system separately
+
+username="$USER"
+user="$(id -u)"
+home="${1:-$HOME}"
+
+imageName="kooroshgobal/mast"
+containerName="mast"
+displayVar="$DISPLAY"
+# find whcih containers are running:
+echo "********************************************************* "
+echo "Following Docker containers are present on your system:"
+echo "********************************************************* "
+docker ps -a
+echo "**************************************** "
+echo "			"
+echo "Creating Docker MAST container ${containerName}"
+#creating docker container for OpenFOAM+ operation
+docker run  -it -d --name ${containerName} --workdir="/home/usr" -v="${home}":/home/usr/workdir ${imageName}
+
+echo "Container ${containerName} was created."
+
+echo "**************************************************"
+echo "Run the ./startMAST  script to launch container"
+echo "**************************************************"

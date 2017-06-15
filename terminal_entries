@@ -1,0 +1,15 @@
+# Build image based on dockerfile
+docker build --tag test/mpi .
+
+# Build containers
+docker create --interactive --tty --name myMPI1 test/mpi
+docker start myMPI1
+docker attach myMPI1
+
+docker create --interactive --tty --volume $HOME:/home --name myMPI2 test/mpi
+docker start myMPI2
+docker attach myMPI2
+
+docker create --interactive --tty --volume $HOME:/home --publish 4000:22 --name myMPI3 test/mpi
+docker start myMPI3
+docker attach myMPI3
